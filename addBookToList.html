@@ -17,6 +17,20 @@
             justify-content: center;
             font-family: 'Roboto', sans-serif;
         }
+        .error, .success {
+            color: white;
+            padding: 5px;
+            text-align: center;
+        }
+        .error {
+            background-color: red;
+        }
+        .success {
+            background-color: green;
+        }
+        label {
+            font-weight: bold;
+        }
 
     </style>
 </head>
@@ -36,7 +50,19 @@
                 <label for="isbn">ISBN</label>
                 <input type="text" id="isbn" class="form-control">
             </div>
+            <div>
+                <input type="submit" value="submit" id="submit" class="btn btn-primary form-control ">
+            </div>
         </form>
+        <table class="table table-bordered table-striped-columns table-info">
+            <thead>
+                <tr>
+                    <th>TITLE</th>
+                    <th>AUTHOR</th>
+                    <th>ISBN</th>
+                </tr>
+            </thead>
+        </table>
     </section>
     
 </body>
