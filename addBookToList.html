@@ -49,7 +49,7 @@
             <div>
                 <label for="isbn">ISBN</label>
                 <input type="text" id="isbn" class="form-control">
-            </div>
+            </div> <br>
             <div>
                 <input type="submit" value="submit" id="submit" class="btn btn-primary form-control ">
             </div>
@@ -88,16 +88,46 @@
 
         //Insert Cols
         row.innerHTML = `<td>${book.title}</td>
-                        <td>${book.title}</td>
-                        <td>${book.title}</td>
+                        <td>${book.author}</td>
+                        <td>${book.isbn}</td>
                         <td><a href="#" class="delete btn btn-danger">DEL</a></td>
         `;
         list.appendChild(row);
-        console.log(row);
-
+        // console.log(row);
     };
 
 
+    //SHOW ALERT PROTOTYPE
+    UI.prototype.showAlert = function (message, className) {
+        
+        //Create Element
+        const  div = document.createElement('div');
+        //Add className
+        div.className = `alert ${className}`;
+        //Add Text
+        div.appendChild(document.createTextNode(message));
+        //Get Parent
+        const container = document.querySelector('.container');
+        //Get Form
+        const form = document.querySelector('#book-form');
+        //Insert Alert
+        container.insertBefore(div, form);
+        //Set Time-Out
+        setTimeout(function() {
+            document.querySelector('.alert').remove();
+        }, 3000);
+
+        // console.log(div);
+    };
+
+    //CLEAR FIELDs PROTOTYPE
+    UI.prototype.clearFields = function () {
+        document.getElementById('title').value = "";
+        document.getElementById('author').value = "";
+        document.getElementById('isbn').value = "";
+    };
+
+    
 
 
     //EVENT LISTENER for ADD BOOK
@@ -106,7 +136,7 @@
         //Get Form Values
         const title = document.getElementById('title').value,
                 author = document.getElementById('author').value,
-                isbn = document.getElementById('isbn');
+                isbn = document.getElementById('isbn').value;
 
         //Instantiate Book
         const book = new Book(title, author, isbn);
@@ -114,12 +144,28 @@
         //Instantiate UI
         const ui = new UI(book);  
         
-        //Add book to list
-        ui.addBookToList(book);
 
+        //Validate
+        if (title === "" || author === "" || isbn === "") {
+
+            //Alert Error
+            ui.showAlert('Please fill in all fields', 'error');
+        } else {
+            
+            //Add book to list
+            ui.addBookToList(book);
+
+            //Alert Success
+            ui.showAlert('Book Added', 'success');
+
+            //Clear Fields
+            ui.clearFields(book);
+        }
 
         e.preventDefault();
     });
+
+    //EVENT LISTENER for DELETE BOOK
     
 
 </script>
