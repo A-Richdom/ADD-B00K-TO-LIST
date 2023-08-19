@@ -127,7 +127,11 @@
         document.getElementById('isbn').value = "";
     };
 
-    
+    //DELETE BOOK PROTOTYPE
+    UI.prototype.deleteBook = function (target) {
+        
+            target.parentElement.parentElement.remove();
+    };
 
 
     //EVENT LISTENER for ADD BOOK
@@ -166,8 +170,20 @@
     });
 
     //EVENT LISTENER for DELETE BOOK
-    
+    document.getElementById('book-list').addEventListener('click', (e) => {
 
+        //Instantiate Book
+        const book = new Book(title, author, isbn);
+
+        //Instantiate UI
+        const ui = new UI(book);  
+
+        //Delete Book
+        ui.deleteBook(e.target);
+
+        e.preventDefault();
+    })
+    
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </html>
