@@ -133,6 +133,27 @@
             target.parentElement.parentElement.remove();
     };
 
+    //LOCAL STORAGE
+    function Store() {
+        function getBooks() {
+            
+        }
+
+        function displayBooks() {
+            
+        }
+        
+        function addBook() {
+            
+        }
+
+        function removeBook() {
+            
+        }
+
+
+    };
+
 
     //EVENT LISTENER for ADD BOOK
     document.getElementById('book-form').addEventListener('submit', (e) => {
@@ -142,10 +163,10 @@
                 author = document.getElementById('author').value,
                 isbn = document.getElementById('isbn').value;
 
-        //Instantiate Book
+        //Instantiate Book Constructor
         const book = new Book(title, author, isbn);
 
-        //Instantiate UI
+        //Instantiate UI Constructor
         const ui = new UI(book);  
         
 
@@ -154,10 +175,14 @@
 
             //Alert Error
             ui.showAlert('Please fill in all fields', 'error');
-        } else {
+        } 
+        else {
             
             //Add book to list
             ui.addBookToList(book);
+
+            //Add to LS
+            Store.addBook(book);
 
             //Alert Success
             ui.showAlert('Book Added', 'success');
@@ -180,6 +205,9 @@
 
         //Delete Book
         ui.deleteBook(e.target);
+
+        //Show Alert
+        ui.showAlert('Book Removed', 'error')
 
         e.preventDefault();
     })
