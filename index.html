@@ -117,7 +117,7 @@
             document.querySelector('.alert').remove();
         }, 3000);
 
-        // console.log(div);
+        console.log(div);
     };
 
     //CLEAR FIELDs PROTOTYPE
@@ -134,29 +134,12 @@
     };
 
     //LOCAL STORAGE
-    function Store() {
-        function getBooks() {
-            
-        }
 
-        function displayBooks() {
-            
-        }
-        
-        function addBook() {
-            
-        }
-
-        function removeBook() {
-            
-        }
-
-
-    };
 
 
     //EVENT LISTENER for ADD BOOK
     document.getElementById('book-form').addEventListener('submit', (e) => {
+        e.preventDefault();
 
         //Get Form Values
         const title = document.getElementById('title').value,
@@ -191,7 +174,6 @@
             ui.clearFields(book);
         }
 
-        e.preventDefault();
     });
 
     //EVENT LISTENER for DELETE BOOK
