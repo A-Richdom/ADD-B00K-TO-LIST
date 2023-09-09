@@ -134,51 +134,29 @@
             target.parentElement.parentElement.remove();
     };
 
-    //LOCAL STORAGE
-    class Store {
-
-        //Get Books
-        static  getBooks() {
-            let books;
-
-            if (localStorage.getItem('books') === null) {
-                books = [];
-            } 
-            else {
-                books = JSON.parse(localStorage.getItem('books'));
-            }
-            return books;
-        }
-
-        //Display Books
-        static displayBooks() {
-            const books = Store.getBooks();
-
-            books.forEach(function(book){
-                const ui = new UI;
-
-                //Add book to UI
-                ui.addBookToList(book);
-            });
-        }
-
-        //Add book
-        static addBook(book) {
-            const books = Store.getBooks();
-
-            books.push(book);
-
-            localStorage.setItem('books', JSON.stringify(books))
-        }
-
-        //Remove book
-        static removeBook() {
-
+    //LOCAL STORAGE HANDLING FUNCTION
+    function getBooksFromStorage() {
+        let books;
+        
+        if (localStorage.getItem('books') === null) {
+            books = [];
+        } 
+        else {
+            books = JSON.parse(localStorage.getItem('books'))
         }
     };
+    
+    function addBookToStorage(book) {
+        const books = getBooksFromStorage();
+
+        books.push(book);
+
+        localStorage.setItem('books', JSON.stringify(books));
+    };
+    console.log(addBookToStorage());
 
     //DOM Load Event
-    document.addEventListener('DOMContentLoaded', Store.displayBooks);
+    // document.addEventListener('DOMContentLoaded', Store.displayBooks);
 
 
 
@@ -210,7 +188,7 @@
             ui.addBookToList(book);
 
             //Add to LS
-            Store.addBook(book);
+           addBookToStorage(book);
 
             //Alert Success
             ui.showAlert('Book Added', 'success');
